@@ -20,6 +20,7 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback,Runn
     protected boolean threadFlag;
     protected Paint paint;
     protected Canvas canvas;
+    protected Thread thread;
     protected SurfaceHolder sfh;
     protected MainActivity mainActivity;
 
