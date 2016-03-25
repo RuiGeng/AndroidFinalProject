@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.planebattle.R;
 import com.example.planebattle.constant.ConstantUtil;
@@ -36,16 +38,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        readyView = new ReadyView(this);
+        setContentView(readyView);
     }
 
     public void toMainView(){
     }
 
     public void toEndView(int score){
+        if(endView == null){
+            endView = new EndView(this);
+            endView.setScore(score);
+        }
+        setContentView(endView);
+        mainView = null;
     }
 
     public void endGame(){
+        if(readyView != null){
+            readyView.setThreadFlag(false);
+        }
+        else if(mainView != null){
+            mainView.setThreadFlag(false);
+        }
+        else if(endView != null){
+            endView.setThreadFlag(false);
+        }
+        this.finish();
     }
 
 
