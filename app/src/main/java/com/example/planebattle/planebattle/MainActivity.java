@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(readyView);
     }
 
-    public void toMainView(){
+    public void toMainView() {
     }
 
-    public void toEndView(int score){
-        if(endView == null){
+    public void toEndView(int score) {
+        if (endView == null) {
             endView = new EndView(this);
             endView.setScore(score);
         }
@@ -56,14 +56,12 @@ public class MainActivity extends AppCompatActivity {
         mainView = null;
     }
 
-    public void endGame(){
-        if(readyView != null){
+    public void endGame() {
+        if (readyView != null) {
             readyView.setThreadFlag(false);
-        }
-        else if(mainView != null){
+        } else if (mainView != null) {
             mainView.setThreadFlag(false);
-        }
-        else if(endView != null){
+        } else if (endView != null) {
             endView.setThreadFlag(false);
         }
         this.finish();

@@ -15,7 +15,7 @@ import com.example.planebattle.planebattle.MainActivity;
 /**
  * Created by RuiGeng on 3/25/2016.
  */
-public class EndView extends BaseView{
+public class EndView extends BaseView {
     private int score;
     private float button_x;
     private float button_y;
@@ -35,7 +35,7 @@ public class EndView extends BaseView{
     public EndView(Context context) {
         super(context);
 
-        this.mainActivity = (MainActivity)context;
+        this.mainActivity = (MainActivity) context;
         rect = new Rect();
         thread = new Thread(this);
     }
@@ -50,10 +50,9 @@ public class EndView extends BaseView{
         super.surfaceCreated(holder);
 
         initBitmap();
-        if(thread.isAlive()){
+        if (thread.isAlive()) {
             thread.start();
-        }
-        else{
+        } else {
             thread = new Thread(this);
             thread.start();
         }
@@ -67,50 +66,40 @@ public class EndView extends BaseView{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1){
+        if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
             float x = event.getX();
             float y = event.getY();
 
-            if(x > button_x && x < button_x + button.getWidth()
-                    && y > button_y && y < button_y + button.getHeight())
-            {
+            if (x > button_x && x < button_x + button.getWidth()
+                    && y > button_y && y < button_y + button.getHeight()) {
                 isBtChange = true;
                 drawSelf();
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.TO_MAIN_VIEW);
-            }
-
-            else if(x > button_x && x < button_x + button.getWidth()
-                    && y > button_y2 && y < button_y2 + button.getHeight())
-            {
+            } else if (x > button_x && x < button_x + button.getWidth()
+                    && y > button_y2 && y < button_y2 + button.getHeight()) {
                 isBtChange2 = true;
                 drawSelf();
                 threadFlag = false;
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.END_GAME);
             }
             return true;
-        }
-        else if(event.getAction() == MotionEvent.ACTION_MOVE){
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             float x = event.getX();
             float y = event.getY();
-            if(x > button_x && x < button_x + button.getWidth()
-                    && y > button_y && y < button_y + button.getHeight())
-            {
+            if (x > button_x && x < button_x + button.getWidth()
+                    && y > button_y && y < button_y + button.getHeight()) {
                 isBtChange = true;
-            }
-            else{
+            } else {
                 isBtChange = false;
             }
-            if(x > button_x && x < button_x + button.getWidth()
-                    && y > button_y2 && y < button_y2 + button.getHeight())
-            {
+            if (x > button_x && x < button_x + button.getWidth()
+                    && y > button_y2 && y < button_y2 + button.getHeight()) {
                 isBtChange2 = true;
-            }
-            else{
+            } else {
                 isBtChange2 = false;
             }
             return true;
-        }
-        else if(event.getAction() == MotionEvent.ACTION_UP){
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
             isBtChange = false;
             isBtChange2 = false;
             return true;
@@ -122,7 +111,7 @@ public class EndView extends BaseView{
     public void initBitmap() {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
         button = BitmapFactory.decodeResource(getResources(), R.drawable.button);
-        button2 = BitmapFactory.decodeResource(getResources(),R.drawable.button2);
+        button2 = BitmapFactory.decodeResource(getResources(), R.drawable.button2);
         scalex = screen_width / background.getWidth();
         scaley = screen_height / background.getHeight();
         button_x = screen_width / 2 - button.getWidth() / 2;
@@ -162,24 +151,22 @@ public class EndView extends BaseView{
 
             if (isBtChange) {
                 canvas.drawBitmap(button2, button_x, button_y, paint);
-            }
-            else {
+            } else {
                 canvas.drawBitmap(button, button_x, button_y, paint);
             }
             if (isBtChange2) {
                 canvas.drawBitmap(button2, button_x, button_y2, paint);
-            }
-            else {
+            } else {
                 canvas.drawBitmap(button, button_x, button_y2, paint);
             }
             paint.setTextSize(40);
 
             paint.getTextBounds(startGame, 0, startGame.length(), rect);
-            canvas.drawText(startGame, screen_width/2 - strwid/2, button_y + button.getHeight()/2 + strhei/2, paint);
-            canvas.drawText(exitGame, screen_width/2 - strwid/2, button_y2 + button.getHeight()/2 + strhei/2, paint);
+            canvas.drawText(startGame, screen_width / 2 - strwid / 2, button_y + button.getHeight() / 2 + strhei / 2, paint);
+            canvas.drawText(exitGame, screen_width / 2 - strwid / 2, button_y2 + button.getHeight() / 2 + strhei / 2, paint);
             paint.setTextSize(60);
-            float textlong = paint.measureText("Score:"+String.valueOf(score));
-            canvas.drawText("Score:"+String.valueOf(score), screen_width/2 - textlong/2, screen_height/2 - 100, paint);
+            float textlong = paint.measureText("Score:" + String.valueOf(score));
+            canvas.drawText("Score:" + String.valueOf(score), screen_width / 2 - textlong / 2, screen_height / 2 - 100, paint);
         } catch (Exception err) {
             err.printStackTrace();
         } finally {
@@ -202,6 +189,7 @@ public class EndView extends BaseView{
             }
         }
     }
+
     public void setScore(int score) {
         this.score = score;
     }

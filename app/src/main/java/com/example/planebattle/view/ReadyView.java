@@ -14,7 +14,7 @@ import com.example.planebattle.constant.ConstantUtil;
 /**
  * Created by RuiGeng on 3/25/2016.
  */
-public class ReadyView extends BaseView{
+public class ReadyView extends BaseView {
     private float button_x;
     private float button_y;
     private float button_y2;
@@ -49,10 +49,9 @@ public class ReadyView extends BaseView{
     public void surfaceCreated(SurfaceHolder holder) {
         super.surfaceCreated(holder);
         initBitmap();
-        if(thread.isAlive()){
+        if (thread.isAlive()) {
             thread.start();
-        }
-        else{
+        } else {
             thread = new Thread(this);
             thread.start();
         }
@@ -76,18 +75,14 @@ public class ReadyView extends BaseView{
                 isBtChange = true;
                 drawSelf();
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.TO_MAIN_VIEW);
-            }
-
-            else if (x > button_x && x < button_x + button.getWidth()
+            } else if (x > button_x && x < button_x + button.getWidth()
                     && y > button_y2 && y < button_y2 + button.getHeight()) {
                 isBtChange2 = true;
                 drawSelf();
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.END_GAME);
             }
             return true;
-        }
-
-        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             float x = event.getX();
             float y = event.getY();
             if (x > button_x && x < button_x + button.getWidth()
@@ -103,9 +98,7 @@ public class ReadyView extends BaseView{
                 isBtChange2 = false;
             }
             return true;
-        }
-
-        else if (event.getAction() == MotionEvent.ACTION_UP) {
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
             isBtChange = false;
             isBtChange2 = false;
             return true;
@@ -161,14 +154,12 @@ public class ReadyView extends BaseView{
 
             if (isBtChange) {
                 canvas.drawBitmap(button2, button_x, button_y, paint);
-            }
-            else {
+            } else {
                 canvas.drawBitmap(button, button_x, button_y, paint);
             }
             if (isBtChange2) {
                 canvas.drawBitmap(button2, button_x, button_y2, paint);
-            }
-            else {
+            } else {
                 canvas.drawBitmap(button, button_x, button_y2, paint);
             }
 
