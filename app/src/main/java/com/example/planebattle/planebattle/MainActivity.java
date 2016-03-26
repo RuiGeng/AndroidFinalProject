@@ -45,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toMainView() {
+        if (mainView == null) {
+            mainView = new MainView(this);
+        }
+        setContentView(mainView);
+        readyView = null;
+        endView = null;
     }
+
 
     public void toEndView(int score) {
         if (endView == null) {
@@ -70,5 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
     public Handler getHandler() {
         return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
     }
 }
