@@ -10,6 +10,7 @@ import com.example.planebattle.interfaces.IMyPlane;
 import com.example.planebattle.view.MainView;
 import com.example.planebattle.factory.GameObjectFactory;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class MyPlane extends GameObject implements IMyPlane {
     public void initBitmap() {
         myplane = BitmapFactory.decodeResource(resources, R.drawable.myplane);
         myplane2 = BitmapFactory.decodeResource(resources, R.drawable.myplaneexplosion);
-        object_width = myplane.getWidth() / 2;
+        object_width = myplane.getWidth();
         object_height = myplane.getHeight();
     }
 
@@ -61,7 +62,7 @@ public class MyPlane extends GameObject implements IMyPlane {
             int x = (int) (currentFrame * object_width);
             canvas.save();
             canvas.clipRect(object_x, object_y, object_x + object_width, object_y + object_height);
-            canvas.drawBitmap(myplane, object_x - x, object_y, paint);
+            canvas.drawBitmap(myplane, object_x, object_y, paint);
             canvas.restore();
             currentFrame++;
             if (currentFrame >= 2) {
