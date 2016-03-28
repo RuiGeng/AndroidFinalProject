@@ -63,9 +63,9 @@ public class MainView extends BaseView {
         super.surfaceCreated(holder);
         initBitmap();
         for (GameObject obj : enemyPlanes) {
-            obj.setScreenWH(screen_width, screen_height);
+            obj.setScreenWH(screenWidth, screenHeight);
         }
-        myPlane.setScreenWH(screen_width, screen_height);
+        myPlane.setScreenWH(screenWidth, screenHeight);
         myPlane.setAlive(true);
         if (thread.isAlive()) {
             thread.start();
@@ -102,7 +102,7 @@ public class MainView extends BaseView {
                 float x = event.getX();
                 float y = event.getY();
                 if (x > myPlane.getMiddle_x() + 20) {
-                    if (myPlane.getMiddle_x() + myPlane.getSpeed() <= screen_width) {
+                    if (myPlane.getMiddle_x() + myPlane.getSpeed() <= screenWidth) {
                         myPlane.setMiddle_x(myPlane.getMiddle_x() + myPlane.getSpeed());
                     }
                 } else if (x < myPlane.getMiddle_x() - 20) {
@@ -111,7 +111,7 @@ public class MainView extends BaseView {
                     }
                 }
                 if (y > myPlane.getMiddle_y() + 20) {
-                    if (myPlane.getMiddle_y() + myPlane.getSpeed() <= screen_height) {
+                    if (myPlane.getMiddle_y() + myPlane.getSpeed() <= screenHeight) {
                         myPlane.setMiddle_y(myPlane.getMiddle_y() + myPlane.getSpeed());
                     }
                 } else if (y < myPlane.getMiddle_y() - 20) {
@@ -128,8 +128,8 @@ public class MainView extends BaseView {
     @Override
     public void initBitmap() {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
-        scalex = screen_width / background.getWidth();
-        scaley = screen_height / background.getHeight();
+        scalex = screenWidth / background.getWidth();
+        scaley = screenHeight / background.getHeight();
     }
 
 
@@ -197,7 +197,7 @@ public class MainView extends BaseView {
             paint.setTextSize(30);
             paint.setColor(Color.rgb(235, 161, 1));
             canvas.drawText("Score :" + String.valueOf(sumScore), 30, 40, paint);
-            canvas.drawText("Speed X " + String.valueOf(speedTime), screen_width - 150, 40, paint);
+            canvas.drawText("Speed X " + String.valueOf(speedTime), screenWidth - 150, 40, paint);
         } catch (Exception err) {
             err.printStackTrace();
         } finally {

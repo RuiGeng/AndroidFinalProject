@@ -73,7 +73,7 @@ public class MyPlane extends GameObject implements IMyPlane {
             canvas.save();
             canvas.clipRect(object_x, object_y, object_x + object_width, object_y
                     + object_height);
-            canvas.drawBitmap(myplane2, object_x - x, object_y, paint);
+            canvas.drawBitmap(myplane2, object_x, object_y, paint);
             canvas.restore();
             currentFrame++;
             if (currentFrame >= 2) {

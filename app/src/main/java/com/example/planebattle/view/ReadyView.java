@@ -112,13 +112,13 @@ public class ReadyView extends BaseView {
         button = BitmapFactory.decodeResource(getResources(), R.drawable.button);
         button2 = BitmapFactory.decodeResource(getResources(), R.drawable.button2);
         text = BitmapFactory.decodeResource(getResources(), R.drawable.text);
-        scalex = screen_width / background.getWidth();
-        scaley = screen_height / background.getHeight();
-        button_x = screen_width / 2 - button.getWidth() / 2;
-        button_y = screen_height / 2 + button.getHeight();
+        scalex = screenWidth / background.getWidth();
+        scaley = screenHeight / background.getHeight();
+        button_x = screenWidth / 2 - button.getWidth() / 2;
+        button_y = screenHeight / 2 + button.getHeight();
         button_y2 = button_y + button.getHeight() + 40;
-        text_x = screen_width / 2 - text.getWidth() / 2;
-        text_y = screen_height / 2 - text.getHeight();
+        text_x = screenWidth / 2 - text.getWidth() / 2;
+        text_y = screenHeight / 2 - text.getHeight();
 
         paint.getTextBounds(startGame, 0, startGame.length(), rect);
         strwid = rect.width();
@@ -163,10 +163,10 @@ public class ReadyView extends BaseView {
                 canvas.drawBitmap(button, button_x, button_y2, paint);
             }
 
-            canvas.drawText(startGame, screen_width / 2 - strwid / 2, button_y
+            canvas.drawText(startGame, screenWidth / 2 - strwid / 2, button_y
                     + button.getHeight() / 2 + strhei / 2, paint);
 
-            canvas.drawText(exitGame, screen_width / 2 - strwid / 2, button_y2
+            canvas.drawText(exitGame, screenWidth / 2 - strwid / 2, button_y2
                     + button.getHeight() / 2 + strhei / 2, paint);
 
             canvas.save();

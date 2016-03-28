@@ -15,8 +15,8 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback,Runn
     protected int currentFrame;
     protected float scalex;
     protected float scaley;
-    protected float screen_width;
-    protected float screen_height;
+    protected float screenWidth;
+    protected float screenHeight;
     protected boolean threadFlag;
     protected Paint paint;
     protected Canvas canvas;
@@ -34,8 +34,8 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        screen_width = this.getWidth();
-        screen_height = this.getHeight();
+        screenWidth = this.getWidth();
+        screenHeight = this.getHeight();
         threadFlag = true;
     }
 

@@ -112,10 +112,10 @@ public class EndView extends BaseView {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
         button = BitmapFactory.decodeResource(getResources(), R.drawable.button);
         button2 = BitmapFactory.decodeResource(getResources(), R.drawable.button2);
-        scalex = screen_width / background.getWidth();
-        scaley = screen_height / background.getHeight();
-        button_x = screen_width / 2 - button.getWidth() / 2;
-        button_y = screen_height / 2 + button.getHeight();
+        scalex = screenWidth / background.getWidth();
+        scaley = screenHeight / background.getHeight();
+        button_x = screenWidth / 2 - button.getWidth() / 2;
+        button_y = screenHeight / 2 + button.getHeight();
         button_y2 = button_y + button.getHeight() + 40;
 
         paint.setTextSize(40);
@@ -162,11 +162,11 @@ public class EndView extends BaseView {
             paint.setTextSize(40);
 
             paint.getTextBounds(startGame, 0, startGame.length(), rect);
-            canvas.drawText(startGame, screen_width / 2 - strwid / 2, button_y + button.getHeight() / 2 + strhei / 2, paint);
-            canvas.drawText(exitGame, screen_width / 2 - strwid / 2, button_y2 + button.getHeight() / 2 + strhei / 2, paint);
+            canvas.drawText(startGame, screenWidth / 2 - strwid / 2, button_y + button.getHeight() / 2 + strhei / 2, paint);
+            canvas.drawText(exitGame, screenWidth / 2 - strwid / 2, button_y2 + button.getHeight() / 2 + strhei / 2, paint);
             paint.setTextSize(60);
             float textlong = paint.measureText("Score:" + String.valueOf(score));
-            canvas.drawText("Score:" + String.valueOf(score), screen_width / 2 - textlong / 2, screen_height / 2 - 100, paint);
+            canvas.drawText("Score:" + String.valueOf(score), screenWidth / 2 - textlong / 2, screenHeight / 2 - 100, paint);
         } catch (Exception err) {
             err.printStackTrace();
         } finally {
