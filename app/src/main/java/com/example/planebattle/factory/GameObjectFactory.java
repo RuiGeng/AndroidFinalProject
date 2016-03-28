@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 import com.example.planebattle.object.GameObject;
 import com.example.planebattle.object.MyBullet;
+import com.example.planebattle.object.MyPlane;
 import com.example.planebattle.object.SmallPlane;
 
 /**
@@ -17,5 +18,9 @@ public class GameObjectFactory {
 
     public GameObject createSmallPlane(Resources resources) {
         return new SmallPlane(resources);
+    }
+
+    public GameObject createMyPlane(Resources resources){
+        return new MyPlane(resources);
     }
 }
