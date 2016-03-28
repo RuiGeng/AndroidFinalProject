@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 /**
  * Created by RuiGeng on 3/26/2016.
  */
-public class Bullet  extends  GameObject {
+public class Bullet extends GameObject {
     protected int harm;
 
     public Bullet(Resources resources) {
@@ -16,25 +16,47 @@ public class Bullet  extends  GameObject {
 
     @Override
     protected void initBitmap() {
-
     }
 
     @Override
     public void drawSelf(Canvas canvas) {
-
     }
 
     @Override
     public void release() {
-
     }
 
     @Override
     public boolean isCollide(GameObject obj) {
+
+        if (object_x <= obj.getObject_x()
+                && object_x + object_width <= obj.getObject_x()) {
+            return false;
+        } else if (obj.getObject_x() <= object_x
+                && obj.getObject_x() + obj.getObject_width() <= object_x) {
+            return false;
+        } else if (object_y <= obj.getObject_y()
+                && object_y + object_height <= obj.getObject_y()) {
+            return false;
+        } else if (obj.getObject_y() <= object_y
+                && obj.getObject_y() + obj.getObject_height() <= object_y) {
+            if (obj instanceof SmallPlane) {
+                if (object_y - speed < obj.getObject_y()) {
+                    isAlive = false;
+                    return true;
+                }
+            } else
+                return false;
+        }
+        isAlive = false;
         return true;
     }
 
     public int getHarm() {
         return harm;
+    }
+
+    public void setHarm(int harm) {
+        this.harm = harm;
     }
 }

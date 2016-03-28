@@ -8,14 +8,11 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.planebattle.R;
 import com.example.planebattle.constant.ConstantUtil;
 import com.example.planebattle.view.EndView;
 import com.example.planebattle.view.MainView;
 import com.example.planebattle.view.ReadyView;
 
-
-import java.util.logging.LogRecord;
 
 public class MainActivity extends AppCompatActivity {
     private EndView endView;

@@ -24,7 +24,6 @@ public class SmallPlane extends EnemyPlane {
 
     @Override
     public void initial(int arg0, float arg1, float arg2) {
-        super.initial(arg0, arg1, arg2);
         isAlive = true;
         bloodVolume = 1;
         blood = bloodVolume;
@@ -39,7 +38,7 @@ public class SmallPlane extends EnemyPlane {
     }
 
     @Override
-    protected void initBitmap() {
+    public void initBitmap() {
         smallPlane = BitmapFactory.decodeResource(resources, R.drawable.small);
         object_width = smallPlane.getWidth();
         object_height = smallPlane.getHeight() / 3;

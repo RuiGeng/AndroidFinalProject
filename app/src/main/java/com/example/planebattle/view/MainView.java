@@ -26,19 +26,16 @@ public class MainView extends BaseView {
     private int bulletScore;
     private int sumScore;
     private int speedTime;
-    private float bg_y;
-    private float bg_y2;
-    private float play_bt_w;
-    private float play_bt_h;
     private boolean isTouchPlane;
     private Bitmap background;
-    private Bitmap background2;
     private MyPlane myPlane;
     private List<EnemyPlane> enemyPlanes;
     private GameObjectFactory factory;
+    private boolean isPlay;
 
     public MainView(Context context) {
         super(context);
+		isPlay = true;
         speedTime = 1;
         factory = new GameObjectFactory();
         enemyPlanes = new ArrayList<EnemyPlane>();
@@ -94,8 +91,9 @@ public class MainView extends BaseView {
             float y = event.getY();
             if (x > myPlane.getObject_x() && x < myPlane.getObject_x() + myPlane.getObject_width()
                     && y > myPlane.getObject_y() && y < myPlane.getObject_y() + myPlane.getObject_height()) {
+				if(isPlay){
                 isTouchPlane = true;
-
+				}
                 return true;
             }
         } else if (event.getAction() == MotionEvent.ACTION_MOVE && event.getPointerCount() == 1) {
@@ -130,11 +128,8 @@ public class MainView extends BaseView {
     @Override
     public void initBitmap() {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
-        background2 = BitmapFactory.decodeResource(getResources(), R.drawable.bg_02);
         scalex = screen_width / background.getWidth();
         scaley = screen_height / background.getHeight();
-        bg_y = 0;
-        bg_y2 = bg_y - screen_height;
     }
 
 
@@ -152,7 +147,7 @@ public class MainView extends BaseView {
 
         myPlane.initButtle();
 
-        if (sumScore >= speedTime * 10000 && speedTime < 6) {
+        if (sumScore >= speedTime * 1000 && speedTime < 10) {
             speedTime++;
         }
     }
@@ -167,9 +162,6 @@ public class MainView extends BaseView {
         if (!background.isRecycled()) {
             background.recycle();
         }
-        if (!background2.isRecycled()) {
-            background2.recycle();
-        }
     }
 
     @Override
@@ -180,11 +172,10 @@ public class MainView extends BaseView {
             canvas.save();
 
             canvas.scale(scalex, scaley, 0, 0);
-            canvas.drawBitmap(background, 0, bg_y, paint);
-            canvas.drawBitmap(background2, 0, bg_y2, paint);
+            canvas.drawBitmap(background, 0, 0, paint);
             canvas.restore();
 
-
+			canvas.save();
             for (EnemyPlane obj : enemyPlanes) {
                 if (obj.isAlive()) {
                     obj.drawSelf(canvas);
@@ -215,21 +206,6 @@ public class MainView extends BaseView {
         }
     }
 
-    public void viewLogic() {
-        if (bg_y > bg_y2) {
-            bg_y += 10;
-            bg_y2 = bg_y - background.getHeight();
-        } else {
-            bg_y2 += 10;
-            bg_y = bg_y2 - background.getHeight();
-        }
-        if (bg_y >= background.getHeight()) {
-            bg_y = bg_y2 - background.getHeight();
-        } else if (bg_y2 >= background.getHeight()) {
-            bg_y2 = bg_y - background.getHeight();
-        }
-    }
-
     public void addGameScore(int score) {
         bulletScore += score;
         sumScore += score;
@@ -241,13 +217,14 @@ public class MainView extends BaseView {
             long startTime = System.currentTimeMillis();
             initObject();
             drawSelf();
-            viewLogic();
             long endTime = System.currentTimeMillis();
+			if(!isPlay){
             synchronized (thread) {
                 try {
                     thread.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+				    }  
                 }
             }
             try {

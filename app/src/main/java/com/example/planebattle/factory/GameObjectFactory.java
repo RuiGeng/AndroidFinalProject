@@ -20,7 +20,7 @@ public class GameObjectFactory {
         return new SmallPlane(resources);
     }
 
-    public GameObject createMyPlane(Resources resources){
+    public GameObject createMyPlane(Resources resources) {
         return new MyPlane(resources);
     }
 }
