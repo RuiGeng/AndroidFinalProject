@@ -12,23 +12,23 @@ import com.example.planebattle.planebattle.MainActivity;
  * Created by RuiGeng on 3/25/2016.
  */
 public class BaseView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
-    protected int currentFrame;
-    protected float scalex;
-    protected float scaley;
+    protected int currentView;
+    protected float scaleX;
+    protected float scaleY;
     protected float screenWidth;
     protected float screenHeight;
     protected boolean threadFlag;
     protected Paint paint;
     protected Canvas canvas;
     protected Thread thread;
-    protected SurfaceHolder sfh;
+    protected SurfaceHolder surfaceHolder;
     protected MainActivity mainActivity;
 
     public BaseView(Context context) {
         super(context);
         this.mainActivity = (MainActivity) context;
-        sfh = this.getHolder();
-        sfh.addCallback(this);
+        surfaceHolder = this.getHolder();
+        surfaceHolder.addCallback(this);
         paint = new Paint();
     }
 

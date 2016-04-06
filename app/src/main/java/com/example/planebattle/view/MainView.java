@@ -128,8 +128,8 @@ public class MainView extends BaseView {
     @Override
     public void initBitmap() {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
-        scalex = screenWidth / background.getWidth();
-        scaley = screenHeight / background.getHeight();
+        scaleX = screenWidth / background.getWidth();
+        scaleY = screenHeight / background.getHeight();
     }
 
 
@@ -167,11 +167,11 @@ public class MainView extends BaseView {
     @Override
     public void drawSelf() {
         try {
-            canvas = sfh.lockCanvas();
+            canvas = surfaceHolder.lockCanvas();
             canvas.drawColor(Color.BLACK);
             canvas.save();
 
-            canvas.scale(scalex, scaley, 0, 0);
+            canvas.scale(scaleX, scaleY, 0, 0);
             canvas.drawBitmap(background, 0, 0, paint);
             canvas.restore();
 
@@ -202,7 +202,7 @@ public class MainView extends BaseView {
             err.printStackTrace();
         } finally {
             if (canvas != null)
-                sfh.unlockCanvasAndPost(canvas);
+                surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
 

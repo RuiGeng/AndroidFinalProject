@@ -112,8 +112,8 @@ public class ReadyView extends BaseView {
         button = BitmapFactory.decodeResource(getResources(), R.drawable.button);
         button2 = BitmapFactory.decodeResource(getResources(), R.drawable.button2);
         text = BitmapFactory.decodeResource(getResources(), R.drawable.text);
-        scalex = screenWidth / background.getWidth();
-        scaley = screenHeight / background.getHeight();
+        scaleX = screenWidth / background.getWidth();
+        scaleY = screenHeight / background.getHeight();
         button_x = screenWidth / 2 - button.getWidth() / 2;
         button_y = screenHeight / 2 + button.getHeight();
         button_y2 = button_y + button.getHeight() + 40;
@@ -144,10 +144,10 @@ public class ReadyView extends BaseView {
     @Override
     public void drawSelf() {
         try {
-            canvas = sfh.lockCanvas();
+            canvas = surfaceHolder.lockCanvas();
             canvas.drawColor(Color.BLACK);
             canvas.save();
-            canvas.scale(scalex, scaley, 0, 0);
+            canvas.scale(scaleX, scaleY, 0, 0);
             canvas.drawBitmap(background, 0, 0, paint);
             canvas.restore();
             canvas.drawBitmap(text, text_x, text_y, paint);
@@ -170,16 +170,16 @@ public class ReadyView extends BaseView {
                     + button.getHeight() / 2 + strhei / 2, paint);
 
             canvas.save();
-            currentFrame++;
-            if (currentFrame >= 3) {
-                currentFrame = 0;
+            currentView++;
+            if (currentView >= 3) {
+                currentView = 0;
             }
             canvas.restore();
         } catch (Exception err) {
             err.printStackTrace();
         } finally {
             if (canvas != null)
-                sfh.unlockCanvasAndPost(canvas);
+                surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
 

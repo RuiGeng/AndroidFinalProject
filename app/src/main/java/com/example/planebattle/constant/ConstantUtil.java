@@ -4,13 +4,10 @@ package com.example.planebattle.constant;
  * Created by RuiGeng on 3/25/2016.
  */
 public class ConstantUtil {
-    public static int DIR_LEFT_UP = 1;
-    public static int DIR_RIGHT_UP = 2;
-    public static int DIR_LEFT_DOWN = 3;
-    public static int DIR_RIGHT_DOWN = 4;
-    public static int DIR_LEFT = 5;
-    public static int DIR_RIGHT = 6;
-    public static int TO_MAIN_VIEW = 7;
-    public static int TO_END_VIEW = 8;
-    public static int END_GAME = 9;
+    //main view
+    public static int TO_MAIN_VIEW = 1;
+    //end view
+    public static int TO_END_VIEW = 2;
+    //end game
+    public static int END_GAME = 3;
 }

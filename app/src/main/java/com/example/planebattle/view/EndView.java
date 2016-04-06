@@ -17,18 +17,18 @@ import com.example.planebattle.planebattle.MainActivity;
  */
 public class EndView extends BaseView {
     private int score;
-    private float button_x;
-    private float button_y;
-    private float button_y2;
-    private float strwid;
-    private float strhei;
-    private boolean isBtChange;
-    private boolean isBtChange2;
-    private String startGame = "Start Game";
-    private String exitGame = "Exit Game";
-    private Bitmap button;
-    private Bitmap button2;
-    private Bitmap background;
+    private float buttonMainX;
+    private float buttonMainY;
+    private float buttonEndY;
+    private float textWidth;
+    private float textHeight;
+    private boolean isMainButtonPressed;
+    private boolean isEndButtonPressed;
+    private String startGameText = "Start Game";
+    private String exitGameText = "Exit Game";
+    private Bitmap buttonBitmap1;
+    private Bitmap buttonBitmap2;
+    private Bitmap backgroundBitmap;
     private Rect rect;
     private MainActivity mainActivity;
 
@@ -70,14 +70,14 @@ public class EndView extends BaseView {
             float x = event.getX();
             float y = event.getY();
 
-            if (x > button_x && x < button_x + button.getWidth()
-                    && y > button_y && y < button_y + button.getHeight()) {
-                isBtChange = true;
+            if (x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
+                    && y > buttonMainY && y < buttonMainY + buttonBitmap1.getHeight()) {
+                isMainButtonPressed = true;
                 drawSelf();
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.TO_MAIN_VIEW);
-            } else if (x > button_x && x < button_x + button.getWidth()
-                    && y > button_y2 && y < button_y2 + button.getHeight()) {
-                isBtChange2 = true;
+            } else if (x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
+                    && y > buttonEndY && y < buttonEndY + buttonBitmap1.getHeight()) {
+                isEndButtonPressed = true;
                 drawSelf();
                 threadFlag = false;
                 mainActivity.getHandler().sendEmptyMessage(ConstantUtil.END_GAME);
@@ -86,22 +86,22 @@ public class EndView extends BaseView {
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             float x = event.getX();
             float y = event.getY();
-            if (x > button_x && x < button_x + button.getWidth()
-                    && y > button_y && y < button_y + button.getHeight()) {
-                isBtChange = true;
+            if (x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
+                    && y > buttonMainY && y < buttonMainY + buttonBitmap1.getHeight()) {
+                isMainButtonPressed = true;
             } else {
-                isBtChange = false;
+                isMainButtonPressed = false;
             }
-            if (x > button_x && x < button_x + button.getWidth()
-                    && y > button_y2 && y < button_y2 + button.getHeight()) {
-                isBtChange2 = true;
+            if (x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
+                    && y > buttonEndY && y < buttonEndY + buttonBitmap1.getHeight()) {
+                isEndButtonPressed = true;
             } else {
-                isBtChange2 = false;
+                isEndButtonPressed = false;
             }
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            isBtChange = false;
-            isBtChange2 = false;
+            isMainButtonPressed = false;
+            isEndButtonPressed = false;
             return true;
         }
         return false;
@@ -109,69 +109,69 @@ public class EndView extends BaseView {
 
     @Override
     public void initBitmap() {
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
-        button = BitmapFactory.decodeResource(getResources(), R.drawable.button);
-        button2 = BitmapFactory.decodeResource(getResources(), R.drawable.button2);
-        scalex = screenWidth / background.getWidth();
-        scaley = screenHeight / background.getHeight();
-        button_x = screenWidth / 2 - button.getWidth() / 2;
-        button_y = screenHeight / 2 + button.getHeight();
-        button_y2 = button_y + button.getHeight() + 40;
+        backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
+        buttonBitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.button);
+        buttonBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.button2);
+        scaleX = screenWidth / backgroundBitmap.getWidth();
+        scaleY = screenHeight / backgroundBitmap.getHeight();
+        buttonMainX = screenWidth / 2 - buttonBitmap1.getWidth() / 2;
+        buttonMainY = screenHeight / 2 + buttonBitmap1.getHeight();
+        buttonEndY = buttonMainY + buttonBitmap1.getHeight() + 40;
 
         paint.setTextSize(40);
-        paint.getTextBounds(startGame, 0, startGame.length(), rect);
-        strwid = rect.width();
-        strhei = rect.height();
+        paint.getTextBounds(startGameText, 0, startGameText.length(), rect);
+        textWidth = rect.width();
+        textHeight = rect.height();
     }
 
     @Override
     public void release() {
 
-        if (!button.isRecycled()) {
-            button.recycle();
+        if (!buttonBitmap1.isRecycled()) {
+            buttonBitmap1.recycle();
         }
-        if (!button2.isRecycled()) {
-            button2.recycle();
+        if (!buttonBitmap2.isRecycled()) {
+            buttonBitmap2.recycle();
         }
-        if (!background.isRecycled()) {
-            background.recycle();
+        if (!backgroundBitmap.isRecycled()) {
+            backgroundBitmap.recycle();
         }
     }
 
     @Override
     public void drawSelf() {
-        // TODO Auto-generated method stub
         try {
-            canvas = sfh.lockCanvas();
+            canvas = surfaceHolder.lockCanvas();
             canvas.drawColor(Color.BLACK);
             canvas.save();
-            canvas.scale(scalex, scaley, 0, 0);
-            canvas.drawBitmap(background, 0, 0, paint);
+            canvas.scale(scaleX, scaleY, 0, 0);
+            canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
             canvas.restore();
 
-            if (isBtChange) {
-                canvas.drawBitmap(button2, button_x, button_y, paint);
+            if (isMainButtonPressed) {
+                canvas.drawBitmap(buttonBitmap2, buttonMainX, buttonMainY, paint);
             } else {
-                canvas.drawBitmap(button, button_x, button_y, paint);
+                canvas.drawBitmap(buttonBitmap1, buttonMainX, buttonMainY, paint);
             }
-            if (isBtChange2) {
-                canvas.drawBitmap(button2, button_x, button_y2, paint);
+            if (isEndButtonPressed) {
+                canvas.drawBitmap(buttonBitmap2, buttonMainX, buttonEndY, paint);
             } else {
-                canvas.drawBitmap(button, button_x, button_y2, paint);
+                canvas.drawBitmap(buttonBitmap1, buttonMainX, buttonEndY, paint);
             }
             paint.setTextSize(40);
 
-            paint.getTextBounds(startGame, 0, startGame.length(), rect);
-            canvas.drawText(startGame, screenWidth / 2 - strwid / 2, button_y + button.getHeight() / 2 + strhei / 2, paint);
-            canvas.drawText(exitGame, screenWidth / 2 - strwid / 2, button_y2 + button.getHeight() / 2 + strhei / 2, paint);
+            paint.getTextBounds(startGameText, 0, startGameText.length(), rect);
+            canvas.drawText(startGameText, screenWidth / 2 - textWidth / 2, buttonMainY + buttonBitmap1.getHeight() / 2 + textHeight / 2, paint);
+            canvas.drawText(exitGameText, screenWidth / 2 - textWidth / 2, buttonEndY + buttonBitmap1.getHeight() / 2 + textHeight / 2, paint);
             paint.setTextSize(60);
-            float textlong = paint.measureText("Score:" + String.valueOf(score));
+            float textlong;
+            textlong = paint.measureText("Score:" + String.valueOf(score));
             canvas.drawText("Score:" + String.valueOf(score), screenWidth / 2 - textlong / 2, screenHeight / 2 - 100, paint);
         } catch (Exception err) {
             err.printStackTrace();
         } finally {
             if (canvas != null)
-                sfh.unlockCanvasAndPost(canvas);
+                surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
 
