@@ -8,7 +8,7 @@ import android.graphics.Paint;
  * Created by RuiGeng on 3/25/2016.
  */
 abstract public class GameObject {
-    protected int currentView;
+    protected int currentPoint;
     protected int speed;
     protected float objectX;
     protected float objectY;

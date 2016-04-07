@@ -57,14 +57,14 @@ public class SmallPlane extends EnemyPlane {
                 }
                 logic();
             } else {
-                int y = (int) (currentView * objectHeight);
+                int y = (int) (currentPoint * objectHeight);
                 canvas.save();
                 canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY + objectHeight);
                 canvas.drawBitmap(smallPlane, objectX, objectY - y, paint);
                 canvas.restore();
-                currentView++;
-                if (currentView >= 3) {
-                    currentView = 0;
+                currentPoint++;
+                if (currentPoint >= 3) {
+                    currentPoint = 0;
                     isExplosion = false;
                     isAlive = false;
                 }
