@@ -8,14 +8,23 @@ import android.graphics.Paint;
  * Created by RuiGeng on 3/25/2016.
  */
 abstract public class GameObject {
+    //current object point
     protected int currentPoint;
+    //object speed
     protected int speed;
+    //object x  coordinate
     protected float objectX;
+    //object y coordinate
     protected float objectY;
+    //object width
     protected float objectWidth;
+    //object height
     protected float objectHeight;
+    //screen width
     protected float screenWidth;
+    //screen height
     protected float screenHeight;
+    //alive flag
     protected boolean isAlive;
     protected Paint paint;
     protected Resources resources;
@@ -25,21 +34,30 @@ abstract public class GameObject {
         this.paint = new Paint();
     }
 
+    //set screen size
     public void setScreenWH(float screenWidth, float screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
     }
 
+    //initial function
+    //arg0: gameSpeed
+    //arg1: object middle x
+    //arg2: object middle y
     public void initial(int arg0, float arg1, float arg2) {
 
     }
 
+    //initial bit map
     protected abstract void initBitmap();
 
+    //object draw it self function
     public abstract void drawSelf(Canvas canvas);
 
+    //release object
     public abstract void release();
 
+    //collide function
     public boolean isCollide(GameObject object) {
         return true;
     }
