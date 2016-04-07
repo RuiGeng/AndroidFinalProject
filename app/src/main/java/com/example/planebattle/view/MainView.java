@@ -23,28 +23,27 @@ import java.util.List;
  * Created by RuiGeng on 3/25/2016.
  */
 public class MainView extends BaseView {
-    private int bulletScore;
-    private int sumScore;
-    private int speedTime;
+    private int totalScore;
+    private int gameSpeed;
     private boolean isTouchPlane;
     private Bitmap background;
     private MyPlane myPlane;
     private List<EnemyPlane> enemyPlanes;
-    private GameObjectFactory factory;
+    private GameObjectFactory objectFactory;
     private boolean isPlay;
 
     public MainView(Context context) {
         super(context);
 		isPlay = true;
-        speedTime = 1;
-        factory = new GameObjectFactory();
+        gameSpeed = 1;
+        objectFactory = new GameObjectFactory();
         enemyPlanes = new ArrayList<EnemyPlane>();
-        myPlane = (MyPlane) factory.createMyPlane(getResources());
+        myPlane = (MyPlane) objectFactory.createMyPlane(getResources());
         myPlane.setMainView(this);
 
         for (int i = 0; i < SmallPlane.sumCount; i++) {
 
-            SmallPlane smallPlane = (SmallPlane) factory.createSmallPlane(getResources());
+            SmallPlane smallPlane = (SmallPlane) objectFactory.createSmallPlane(getResources());
             enemyPlanes.add(smallPlane);
 
         }
@@ -138,7 +137,7 @@ public class MainView extends BaseView {
 
             if (obj instanceof SmallPlane) {
                 if (!obj.isAlive()) {
-                    obj.initial(speedTime, 0, 0);
+                    obj.initial(gameSpeed, 0, 0);
                     break;
                 }
             }
@@ -147,8 +146,8 @@ public class MainView extends BaseView {
 
         myPlane.initButtle();
 
-        if (sumScore >= speedTime * 1000 && speedTime < 10) {
-            speedTime++;
+        if (totalScore >= gameSpeed * 1000 && gameSpeed < 10) {
+            gameSpeed++;
         }
     }
 
@@ -196,8 +195,8 @@ public class MainView extends BaseView {
 
             paint.setTextSize(30);
             paint.setColor(Color.rgb(235, 161, 1));
-            canvas.drawText("Score :" + String.valueOf(sumScore), 30, 40, paint);
-            canvas.drawText("Speed X " + String.valueOf(speedTime), screenWidth - 150, 40, paint);
+            canvas.drawText("Score :" + String.valueOf(totalScore), 30, 40, paint);
+            canvas.drawText("Speed X " + String.valueOf(gameSpeed), screenWidth - 150, 40, paint);
         } catch (Exception err) {
             err.printStackTrace();
         } finally {
@@ -207,8 +206,7 @@ public class MainView extends BaseView {
     }
 
     public void addGameScore(int score) {
-        bulletScore += score;
-        sumScore += score;
+        totalScore += score;
     }
 
     @Override
@@ -241,7 +239,7 @@ public class MainView extends BaseView {
         }
         Message message = new Message();
         message.what = ConstantUtil.TO_END_VIEW;
-        message.arg1 = Integer.valueOf(sumScore);
+        message.arg1 = Integer.valueOf(totalScore);
         mainActivity.getHandler().sendMessage(message);
     }
 }

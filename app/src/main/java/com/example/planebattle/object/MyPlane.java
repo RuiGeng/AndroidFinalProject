@@ -101,7 +101,7 @@ public class MyPlane extends GameObject implements IMyPlane {
             if (obj.isAlive()) {
                 for (EnemyPlane pobj : planes) {
                     if (pobj.isCanCollide()) {
-                        if (obj.isCollide((GameObject) pobj)) {
+                        if (obj.isCollide(pobj)) {
                             pobj.attacked(obj.getHarm());
                             if (pobj.isExplosion()) {
                                 mainView.addGameScore(pobj.getScore());

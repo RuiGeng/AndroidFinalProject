@@ -86,18 +86,10 @@ public class EndView extends BaseView {
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             float x = event.getX();
             float y = event.getY();
-            if (x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
-                    && y > buttonMainY && y < buttonMainY + buttonBitmap1.getHeight()) {
-                isMainButtonPressed = true;
-            } else {
-                isMainButtonPressed = false;
-            }
-            if (x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
-                    && y > buttonEndY && y < buttonEndY + buttonBitmap1.getHeight()) {
-                isEndButtonPressed = true;
-            } else {
-                isEndButtonPressed = false;
-            }
+            isMainButtonPressed = x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
+                    && y > buttonMainY && y < buttonMainY + buttonBitmap1.getHeight();
+            isEndButtonPressed = x > buttonMainX && x < buttonMainX + buttonBitmap1.getWidth()
+                    && y > buttonEndY && y < buttonEndY + buttonBitmap1.getHeight();
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             isMainButtonPressed = false;
@@ -164,9 +156,9 @@ public class EndView extends BaseView {
             canvas.drawText(startGameText, screenWidth / 2 - textWidth / 2, buttonMainY + buttonBitmap1.getHeight() / 2 + textHeight / 2, paint);
             canvas.drawText(exitGameText, screenWidth / 2 - textWidth / 2, buttonEndY + buttonBitmap1.getHeight() / 2 + textHeight / 2, paint);
             paint.setTextSize(60);
-            float textlong;
-            textlong = paint.measureText("Score:" + String.valueOf(score));
-            canvas.drawText("Score:" + String.valueOf(score), screenWidth / 2 - textlong / 2, screenHeight / 2 - 100, paint);
+            float scoreTextSize;
+            scoreTextSize = paint.measureText("Score:" + String.valueOf(score));
+            canvas.drawText("Score:" + String.valueOf(score), screenWidth / 2 - scoreTextSize / 2, screenHeight / 2 - 100, paint);
         } catch (Exception err) {
             err.printStackTrace();
         } finally {

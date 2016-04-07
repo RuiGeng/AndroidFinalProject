@@ -41,11 +41,7 @@ public class EnemyPlane extends GameObject {
         } else {
             isAlive = false;
         }
-        if (object_y + object_height > 0) {
-            isVisible = true;
-        } else {
-            isVisible = false;
-        }
+        isVisible = object_y + object_height > 0;
     }
 
     public void attacked(int harm) {
