@@ -17,21 +17,21 @@ import java.util.List;
  * Created by RuiGeng on 3/25/2016.
  */
 public class MyPlane extends GameObject implements IMyPlane {
-    private float middle_x;
-    private float middle_y;
-    private Bitmap myplane;
-    private Bitmap myplane2;
+    private float planeMiddleX;
+    private float planeMiddleY;
+    private Bitmap myPlaneBitmap1;
+    private Bitmap myPlaneBitmap2;
     private List<Bullet> bullets;
     private MainView mainView;
-    private GameObjectFactory factory;
+    private GameObjectFactory objectFactory;
 
     public MyPlane(Resources resources) {
         super(resources);
         initBitmap();
         this.speed = 8;
-        factory = new GameObjectFactory();
+        objectFactory = new GameObjectFactory();
         bullets = new ArrayList<Bullet>();
-        changeButtle();
+        changeBullet();
     }
 
     public void setMainView(MainView mainView) {
@@ -43,36 +43,34 @@ public class MyPlane extends GameObject implements IMyPlane {
         super.setScreenWH(screenWidth, screenHeight);
         objectX = screenWidth / 2 - objectWidth / 2;
         objectY = screenHeight - objectHeight;
-        middle_x = objectX + objectWidth / 2;
-        middle_y = objectY + objectHeight / 2;
+        planeMiddleX = objectX + objectWidth / 2;
+        planeMiddleY = objectY + objectHeight / 2;
     }
 
     @Override
     public void initBitmap() {
-        myplane = BitmapFactory.decodeResource(resources, R.drawable.myplane);
-        myplane2 = BitmapFactory.decodeResource(resources, R.drawable.myplaneexplosion);
-        objectWidth = myplane.getWidth();
-        objectHeight = myplane.getHeight();
+        myPlaneBitmap1 = BitmapFactory.decodeResource(resources, R.drawable.myplane);
+        myPlaneBitmap2 = BitmapFactory.decodeResource(resources, R.drawable.myplaneexplosion);
+        objectWidth = myPlaneBitmap1.getWidth();
+        objectHeight = myPlaneBitmap1.getHeight();
     }
 
     @Override
     public void drawSelf(Canvas canvas) {
         if (isAlive) {
-            int x = (int) (currentView * objectWidth);
             canvas.save();
             canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY + objectHeight);
-            canvas.drawBitmap(myplane, objectX, objectY, paint);
+            canvas.drawBitmap(myPlaneBitmap1, objectX, objectY, paint);
             canvas.restore();
             currentView++;
             if (currentView >= 2) {
                 currentView = 0;
             }
         } else {
-            int x = (int) (currentView * objectWidth);
             canvas.save();
             canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY
                     + objectHeight);
-            canvas.drawBitmap(myplane2, objectX, objectY, paint);
+            canvas.drawBitmap(myPlaneBitmap2, objectX, objectY, paint);
             canvas.restore();
             currentView++;
             if (currentView >= 2) {
@@ -83,78 +81,75 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     @Override
     public void release() {
-        for (Bullet obj : bullets) {
-            obj.release();
+        for (Bullet bullet : bullets) {
+            bullet.release();
         }
-        if (!myplane.isRecycled()) {
-            myplane.recycle();
+        if (!myPlaneBitmap1.isRecycled()) {
+            myPlaneBitmap1.recycle();
         }
-        if (!myplane2.isRecycled()) {
-            myplane2.recycle();
+        if (!myPlaneBitmap2.isRecycled()) {
+            myPlaneBitmap2.recycle();
         }
     }
 
     @Override
     public void shoot(Canvas canvas, List<EnemyPlane> planes) {
-        for (Bullet obj : bullets) {
-            if (obj.isAlive()) {
-                for (EnemyPlane pobj : planes) {
-                    if (pobj.isCanCollide()) {
-                        if (obj.isCollide(pobj)) {
-                            pobj.attacked(obj.getHarm());
-                            if (pobj.isExplosion()) {
-                                mainView.addGameScore(pobj.getScore());
-                                if (pobj instanceof SmallPlane) {
-                                } else {
-                                }
+        for (Bullet bullet : bullets) {
+            if (bullet.isAlive()) {
+                for (EnemyPlane enemyPlane : planes) {
+                    if (enemyPlane.isCanCollide()) {
+                        if (bullet.isCollide(enemyPlane)) {
+                            enemyPlane.attacked(bullet.getHarm());
+                            if (enemyPlane.isExplosion()) {
+                                mainView.addGameScore(enemyPlane.getScore());
                             }
                             break;
                         }
                     }
                 }
-                obj.drawSelf(canvas);
+                bullet.drawSelf(canvas);
             }
         }
     }
 
     @Override
-    public void initButtle() {
-        for (Bullet obj : bullets) {
-            if (!obj.isAlive()) {
-                obj.initial(0, middle_x, middle_y);
+    public void initBullet() {
+        for (Bullet bullet : bullets) {
+            if (!bullet.isAlive()) {
+                bullet.initial(0, planeMiddleX, planeMiddleY);
                 break;
             }
         }
     }
 
     @Override
-    public void changeButtle() {
+    public void changeBullet() {
         bullets.clear();
         for (int i = 0; i < 4; i++) {
-            MyBullet bullet = (MyBullet) factory.createMyBullet(resources);
+            MyBullet bullet = (MyBullet) objectFactory.createMyBullet(resources);
             bullets.add(bullet);
         }
     }
 
     @Override
-    public float getMiddle_x() {
-        return middle_x;
+    public float getPlaneMiddleX() {
+        return planeMiddleX;
     }
 
     @Override
-    public void setMiddle_x(float middle_x) {
-        this.middle_x = middle_x;
-        this.objectX = middle_x - objectWidth / 2;
+    public void setPlaneMiddleX(float planeMiddleX) {
+        this.planeMiddleX = planeMiddleX;
+        this.objectX = planeMiddleX - objectWidth / 2;
     }
 
     @Override
-    public float getMiddle_y() {
-        return middle_y;
+    public float getPlaneMiddleY() {
+        return planeMiddleY;
     }
 
     @Override
-    public void setMiddle_y(float middle_y) {
-        this.middle_y = middle_y;
-        this.objectY = middle_y - objectHeight / 2;
+    public void setPlaneMiddleY(float planeMiddleY) {
+        this.planeMiddleY = planeMiddleY;
+        this.objectY = planeMiddleY - objectHeight / 2;
     }
 }

@@ -41,7 +41,7 @@ public class MainView extends BaseView {
         myPlane = (MyPlane) objectFactory.createMyPlane(getResources());
         myPlane.setMainView(this);
 
-        for (int i = 0; i < SmallPlane.sumCount; i++) {
+        for (int i = 0; i < SmallPlane.totalCount; i++) {
 
             SmallPlane smallPlane = (SmallPlane) objectFactory.createSmallPlane(getResources());
             enemyPlanes.add(smallPlane);
@@ -61,8 +61,8 @@ public class MainView extends BaseView {
 
         super.surfaceCreated(holder);
         initBitmap();
-        for (GameObject obj : enemyPlanes) {
-            obj.setScreenWH(screenWidth, screenHeight);
+        for (GameObject gameObject : enemyPlanes) {
+            gameObject.setScreenWH(screenWidth, screenHeight);
         }
         myPlane.setScreenWH(screenWidth, screenHeight);
         myPlane.setAlive(true);
@@ -100,22 +100,22 @@ public class MainView extends BaseView {
             if (isTouchPlane) {
                 float x = event.getX();
                 float y = event.getY();
-                if (x > myPlane.getMiddle_x() + 20) {
-                    if (myPlane.getMiddle_x() + myPlane.getSpeed() <= screenWidth) {
-                        myPlane.setMiddle_x(myPlane.getMiddle_x() + myPlane.getSpeed());
+                if (x > myPlane.getPlaneMiddleX() + 20) {
+                    if (myPlane.getPlaneMiddleX() + myPlane.getSpeed() <= screenWidth) {
+                        myPlane.setPlaneMiddleX(myPlane.getPlaneMiddleX() + myPlane.getSpeed());
                     }
-                } else if (x < myPlane.getMiddle_x() - 20) {
-                    if (myPlane.getMiddle_x() - myPlane.getSpeed() >= 0) {
-                        myPlane.setMiddle_x(myPlane.getMiddle_x() - myPlane.getSpeed());
+                } else if (x < myPlane.getPlaneMiddleX() - 20) {
+                    if (myPlane.getPlaneMiddleX() - myPlane.getSpeed() >= 0) {
+                        myPlane.setPlaneMiddleX(myPlane.getPlaneMiddleX() - myPlane.getSpeed());
                     }
                 }
-                if (y > myPlane.getMiddle_y() + 20) {
-                    if (myPlane.getMiddle_y() + myPlane.getSpeed() <= screenHeight) {
-                        myPlane.setMiddle_y(myPlane.getMiddle_y() + myPlane.getSpeed());
+                if (y > myPlane.getPlaneMiddleY() + 20) {
+                    if (myPlane.getPlaneMiddleY() + myPlane.getSpeed() <= screenHeight) {
+                        myPlane.setPlaneMiddleY(myPlane.getPlaneMiddleY() + myPlane.getSpeed());
                     }
-                } else if (y < myPlane.getMiddle_y() - 20) {
-                    if (myPlane.getMiddle_y() - myPlane.getSpeed() >= 0) {
-                        myPlane.setMiddle_y(myPlane.getMiddle_y() - myPlane.getSpeed());
+                } else if (y < myPlane.getPlaneMiddleY() - 20) {
+                    if (myPlane.getPlaneMiddleY() - myPlane.getSpeed() >= 0) {
+                        myPlane.setPlaneMiddleY(myPlane.getPlaneMiddleY() - myPlane.getSpeed());
                     }
                 }
                 return true;
@@ -133,18 +133,18 @@ public class MainView extends BaseView {
 
 
     public void initObject() {
-        for (EnemyPlane obj : enemyPlanes) {
+        for (EnemyPlane enemyPlane : enemyPlanes) {
 
-            if (obj instanceof SmallPlane) {
-                if (!obj.isAlive()) {
-                    obj.initial(gameSpeed, 0, 0);
+            if (enemyPlane instanceof SmallPlane) {
+                if (!enemyPlane.isAlive()) {
+                    enemyPlane.initial(gameSpeed, 0, 0);
                     break;
                 }
             }
 
         }
 
-        myPlane.initButtle();
+        myPlane.initBullet();
 
         if (totalScore >= gameSpeed * 1000 && gameSpeed < 10) {
             gameSpeed++;
@@ -153,8 +153,8 @@ public class MainView extends BaseView {
 
     @Override
     public void release() {
-        for (GameObject obj : enemyPlanes) {
-            obj.release();
+        for (GameObject gameObject : enemyPlanes) {
+            gameObject.release();
         }
         myPlane.release();
 
@@ -175,12 +175,12 @@ public class MainView extends BaseView {
             canvas.restore();
 
 			canvas.save();
-            for (EnemyPlane obj : enemyPlanes) {
-                if (obj.isAlive()) {
-                    obj.drawSelf(canvas);
+            for (EnemyPlane enemyPlane : enemyPlanes) {
+                if (enemyPlane.isAlive()) {
+                    enemyPlane.drawSelf(canvas);
 
-                    if (obj.isCanCollide() && myPlane.isAlive()) {
-                        if (obj.isCollide(myPlane)) {
+                    if (enemyPlane.isCanCollide() && myPlane.isAlive()) {
+                        if (enemyPlane.isCollide(myPlane)) {
                             myPlane.setAlive(false);
                         }
                     }

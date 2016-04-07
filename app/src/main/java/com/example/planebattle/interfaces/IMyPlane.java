@@ -10,14 +10,17 @@ import java.util.List;
  * Created by RuiGeng on 3/25/2016.
  */
 public interface IMyPlane {
-    float getMiddle_x();
-    void setMiddle_x(float middle_x);
-    float getMiddle_y();
-    void setMiddle_y(float middle_y);
+    float getPlaneMiddleX();
+
+    void setPlaneMiddleX(float middle_x);
+
+    float getPlaneMiddleY();
+
+    void setPlaneMiddleY(float middle_y);
 
     void shoot(Canvas canvas, List<EnemyPlane> planes);
 
-    void initButtle();
+    void initBullet();
 
-    void changeButtle();
+    void changeBullet();
 }

@@ -11,7 +11,7 @@ import com.example.planebattle.planebattle.MainActivity;
 /**
  * Created by RuiGeng on 3/25/2016.
  */
-public class BaseView extends SurfaceView implements SurfaceHolder.Callback,Runnable {
+public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     protected int currentView;
     protected float scaleX;
     protected float scaleY;
@@ -54,11 +54,14 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     }
 
-    public void initBitmap(){}
+    public void initBitmap() {
+    }
 
-    public void release(){}
+    public void release() {
+    }
 
-    public void drawSelf(){}
+    public void drawSelf() {
+    }
 
     public void setThreadFlag(boolean threadFlag) {
         this.threadFlag = threadFlag;

@@ -15,7 +15,7 @@ import java.util.Random;
 public class SmallPlane extends EnemyPlane {
     private static int currentCount = 0;
     private Bitmap smallPlane;
-    public static int sumCount = 8;
+    public static int totalCount = 10;
 
     public SmallPlane(Resources resources) {
         super(resources);
@@ -32,7 +32,7 @@ public class SmallPlane extends EnemyPlane {
         objectX = ran.nextInt((int) (screenWidth - objectWidth));
         objectY = -objectHeight * (currentCount * 2 + 1);
         currentCount++;
-        if (currentCount >= sumCount) {
+        if (currentCount >= totalCount) {
             currentCount = 0;
         }
     }
