@@ -192,7 +192,6 @@ public class MainView extends BaseView {
             myPlane.drawSelf(canvas);
             myPlane.shoot(canvas, enemyPlanes);
 
-
             paint.setTextSize(30);
             paint.setColor(Color.rgb(235, 161, 1));
             canvas.drawText("Score :" + String.valueOf(totalScore), 30, 40, paint);

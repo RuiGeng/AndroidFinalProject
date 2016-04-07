@@ -17,18 +17,25 @@ import java.util.List;
  * Created by RuiGeng on 3/25/2016.
  */
 public class MyPlane extends GameObject implements IMyPlane {
+    //player plane middle x coordinate
     private float planeMiddleX;
+    //player plane middle y coordinate
     private float planeMiddleY;
+    //bitmap for normal plane
     private Bitmap myPlaneBitmap1;
+    //bitmap for explosion plane
     private Bitmap myPlaneBitmap2;
+    //bullets list
     private List<Bullet> bullets;
+    //main view
     private MainView mainView;
+    //object factory
     private GameObjectFactory objectFactory;
 
     public MyPlane(Resources resources) {
         super(resources);
         initBitmap();
-        this.speed = 8;
+        this.speed = 10;
         objectFactory = new GameObjectFactory();
         bullets = new ArrayList<Bullet>();
         changeBullet();
@@ -38,6 +45,7 @@ public class MyPlane extends GameObject implements IMyPlane {
         this.mainView = mainView;
     }
 
+    //set screen size
     @Override
     public void setScreenWH(float screenWidth, float screenHeight) {
         super.setScreenWH(screenWidth, screenHeight);
@@ -47,6 +55,7 @@ public class MyPlane extends GameObject implements IMyPlane {
         planeMiddleY = objectY + objectHeight / 2;
     }
 
+    //set images
     @Override
     public void initBitmap() {
         myPlaneBitmap1 = BitmapFactory.decodeResource(resources, R.drawable.myplane);
@@ -55,6 +64,7 @@ public class MyPlane extends GameObject implements IMyPlane {
         objectHeight = myPlaneBitmap1.getHeight();
     }
 
+    //draw normal plane and explosion plane
     @Override
     public void drawSelf(Canvas canvas) {
         if (isAlive) {
@@ -79,6 +89,7 @@ public class MyPlane extends GameObject implements IMyPlane {
         }
     }
 
+    //destroy plane
     @Override
     public void release() {
         for (Bullet bullet : bullets) {
@@ -92,6 +103,7 @@ public class MyPlane extends GameObject implements IMyPlane {
         }
     }
 
+    //shoot bullets
     @Override
     public void shoot(Canvas canvas, List<EnemyPlane> planes) {
         for (Bullet bullet : bullets) {
@@ -112,6 +124,7 @@ public class MyPlane extends GameObject implements IMyPlane {
         }
     }
 
+    //initial bullets
     @Override
     public void initBullet() {
         for (Bullet bullet : bullets) {
@@ -125,7 +138,7 @@ public class MyPlane extends GameObject implements IMyPlane {
     @Override
     public void changeBullet() {
         bullets.clear();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             MyBullet bullet = (MyBullet) objectFactory.createMyBullet(resources);
             bullets.add(bullet);
         }
