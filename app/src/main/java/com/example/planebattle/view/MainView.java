@@ -88,8 +88,8 @@ public class MainView extends BaseView {
         } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
             float x = event.getX();
             float y = event.getY();
-            if (x > myPlane.getObject_x() && x < myPlane.getObject_x() + myPlane.getObject_width()
-                    && y > myPlane.getObject_y() && y < myPlane.getObject_y() + myPlane.getObject_height()) {
+            if (x > myPlane.getObjectX() && x < myPlane.getObjectX() + myPlane.getObjectWidth()
+                    && y > myPlane.getObjectY() && y < myPlane.getObjectY() + myPlane.getObjectHeight()) {
 				if(isPlay){
                 isTouchPlane = true;
 				}

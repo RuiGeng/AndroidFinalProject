@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private MainView mainView;
     private ReadyView readyView;
 
-    private Handler handler = new Handler() {
+    public Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == ConstantUtil.TO_MAIN_VIEW) {
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
         this.finish();
     }
-
 
     public Handler getHandler() {
         return handler;

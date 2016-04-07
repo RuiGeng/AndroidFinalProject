@@ -36,12 +36,12 @@ public class EnemyPlane extends GameObject {
 
     @Override
     public void logic() {
-        if (object_y < screen_height) {
-            object_y += speed;
+        if (objectY < screenHeight) {
+            objectY += speed;
         } else {
             isAlive = false;
         }
-        isVisible = object_y + object_height > 0;
+        isVisible = objectY + objectHeight > 0;
     }
 
     public void attacked(int harm) {
@@ -54,17 +54,17 @@ public class EnemyPlane extends GameObject {
     @Override
     public boolean isCollide(GameObject obj) {
 
-        if (object_x <= obj.getObject_x()
-                && object_x + object_width <= obj.getObject_x()) {
+        if (objectX <= obj.getObjectX()
+                && objectX + objectWidth <= obj.getObjectX()) {
             return false;
-        } else if (obj.getObject_x() <= object_x
-                && obj.getObject_x() + obj.getObject_width() <= object_x) {
+        } else if (obj.getObjectX() <= objectX
+                && obj.getObjectX() + obj.getObjectWidth() <= objectX) {
             return false;
-        } else if (object_y <= obj.getObject_y()
-                && object_y + object_height <= obj.getObject_y()) {
+        } else if (objectY <= obj.getObjectY()
+                && objectY + objectHeight <= obj.getObjectY()) {
             return false;
-        } else if (obj.getObject_y() <= object_y
-                && obj.getObject_y() + obj.getObject_height() <= object_y) {
+        } else if (obj.getObjectY() <= objectY
+                && obj.getObjectY() + obj.getObjectHeight() <= objectY) {
             return false;
         }
         return true;

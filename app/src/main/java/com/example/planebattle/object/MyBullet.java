@@ -22,23 +22,23 @@ public class MyBullet extends Bullet {
     public void initial(int arg0, float arg1, float arg2) {
         isAlive = true;
         speed = 100;
-        object_x = arg1 - object_width / 2;
-        object_y = arg2 - object_height;
+        objectX = arg1 - objectWidth / 2;
+        objectY = arg2 - objectHeight;
     }
 
     @Override
     public void initBitmap() {
         bullet = BitmapFactory.decodeResource(resources, R.drawable.bullet);
-        object_width = bullet.getWidth();
-        object_height = bullet.getHeight();
+        objectWidth = bullet.getWidth();
+        objectHeight = bullet.getHeight();
     }
 
     @Override
     public void drawSelf(Canvas canvas) {
         if (isAlive) {
             canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width, object_y + object_height);
-            canvas.drawBitmap(bullet, object_x, object_y, paint);
+            canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY + objectHeight);
+            canvas.drawBitmap(bullet, objectX, objectY, paint);
             canvas.restore();
             logic();
         }
@@ -53,8 +53,8 @@ public class MyBullet extends Bullet {
 
     @Override
     public void logic() {
-        if (object_y >= 0) {
-            object_y -= speed;
+        if (objectY >= 0) {
+            objectY -= speed;
         } else {
             isAlive = false;
         }

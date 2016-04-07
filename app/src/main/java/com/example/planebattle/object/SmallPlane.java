@@ -29,8 +29,8 @@ public class SmallPlane extends EnemyPlane {
         blood = bloodVolume;
         Random ran = new Random();
         speed = ran.nextInt(8) + 8 * arg0;
-        object_x = ran.nextInt((int) (screen_width - object_width));
-        object_y = -object_height * (currentCount * 2 + 1);
+        objectX = ran.nextInt((int) (screenWidth - objectWidth));
+        objectY = -objectHeight * (currentCount * 2 + 1);
         currentCount++;
         if (currentCount >= sumCount) {
             currentCount = 0;
@@ -40,8 +40,8 @@ public class SmallPlane extends EnemyPlane {
     @Override
     public void initBitmap() {
         smallPlane = BitmapFactory.decodeResource(resources, R.drawable.small);
-        object_width = smallPlane.getWidth();
-        object_height = smallPlane.getHeight() / 3;
+        objectWidth = smallPlane.getWidth();
+        objectHeight = smallPlane.getHeight() / 3;
     }
 
     @Override
@@ -51,20 +51,20 @@ public class SmallPlane extends EnemyPlane {
             if (!isExplosion) {
                 if (isVisible) {
                     canvas.save();
-                    canvas.clipRect(object_x, object_y, object_x + object_width, object_y + object_height);
-                    canvas.drawBitmap(smallPlane, object_x, object_y, paint);
+                    canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY + objectHeight);
+                    canvas.drawBitmap(smallPlane, objectX, objectY, paint);
                     canvas.restore();
                 }
                 logic();
             } else {
-                int y = (int) (currentFrame * object_height);
+                int y = (int) (currentView * objectHeight);
                 canvas.save();
-                canvas.clipRect(object_x, object_y, object_x + object_width, object_y + object_height);
-                canvas.drawBitmap(smallPlane, object_x, object_y - y, paint);
+                canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY + objectHeight);
+                canvas.drawBitmap(smallPlane, objectX, objectY - y, paint);
                 canvas.restore();
-                currentFrame++;
-                if (currentFrame >= 3) {
-                    currentFrame = 0;
+                currentView++;
+                if (currentView >= 3) {
+                    currentView = 0;
                     isExplosion = false;
                     isAlive = false;
                 }

@@ -29,19 +29,19 @@ public class Bullet extends GameObject {
     @Override
     public boolean isCollide(GameObject obj) {
 
-        if (object_x <= obj.getObject_x()
-                && object_x + object_width <= obj.getObject_x()) {
+        if (objectX <= obj.getObjectX()
+                && objectX + objectWidth <= obj.getObjectX()) {
             return false;
-        } else if (obj.getObject_x() <= object_x
-                && obj.getObject_x() + obj.getObject_width() <= object_x) {
+        } else if (obj.getObjectX() <= objectX
+                && obj.getObjectX() + obj.getObjectWidth() <= objectX) {
             return false;
-        } else if (object_y <= obj.getObject_y()
-                && object_y + object_height <= obj.getObject_y()) {
+        } else if (objectY <= obj.getObjectY()
+                && objectY + objectHeight <= obj.getObjectY()) {
             return false;
-        } else if (obj.getObject_y() <= object_y
-                && obj.getObject_y() + obj.getObject_height() <= object_y) {
+        } else if (obj.getObjectY() <= objectY
+                && obj.getObjectY() + obj.getObjectHeight() <= objectY) {
             if (obj instanceof SmallPlane) {
-                if (object_y - speed < obj.getObject_y()) {
+                if (objectY - speed < obj.getObjectY()) {
                     isAlive = false;
                     return true;
                 }

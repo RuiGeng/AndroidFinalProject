@@ -8,14 +8,14 @@ import android.graphics.Paint;
  * Created by RuiGeng on 3/25/2016.
  */
 abstract public class GameObject {
-    protected int currentFrame;
+    protected int currentView;
     protected int speed;
-    protected float object_x;
-    protected float object_y;
-    protected float object_width;
-    protected float object_height;
-    protected float screen_width;
-    protected float screen_height;
+    protected float objectX;
+    protected float objectY;
+    protected float objectWidth;
+    protected float objectHeight;
+    protected float screenWidth;
+    protected float screenHeight;
     protected boolean isAlive;
     protected Paint paint;
     protected Resources resources;
@@ -25,9 +25,9 @@ abstract public class GameObject {
         this.paint = new Paint();
     }
 
-    public void setScreenWH(float screen_width, float screen_height) {
-        this.screen_width = screen_width;
-        this.screen_height = screen_height;
+    public void setScreenWH(float screenWidth, float screenHeight) {
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
     }
 
     public void initial(int arg0, float arg1, float arg2) {
@@ -55,36 +55,36 @@ abstract public class GameObject {
         this.speed = speed;
     }
 
-    public float getObject_x() {
-        return object_x;
+    public float getObjectX() {
+        return objectX;
     }
 
-    public void setObject_x(float object_x) {
-        this.object_x = object_x;
+    public void setObjectX(float objectX) {
+        this.objectX = objectX;
     }
 
-    public float getObject_y() {
-        return object_y;
+    public float getObjectY() {
+        return objectY;
     }
 
-    public void setObject_y(float object_y) {
-        this.object_y = object_y;
+    public void setObjectY(float objectY) {
+        this.objectY = objectY;
     }
 
-    public float getObject_width() {
-        return object_width;
+    public float getObjectWidth() {
+        return objectWidth;
     }
 
-    public void setObject_width(float object_width) {
-        this.object_width = object_width;
+    public void setObjectWidth(float objectWidth) {
+        this.objectWidth = objectWidth;
     }
 
-    public float getObject_height() {
-        return object_height;
+    public float getObjectHeight() {
+        return objectHeight;
     }
 
-    public void setObject_height(float object_height) {
-        this.object_height = object_height;
+    public void setObjectHeight(float objectHeight) {
+        this.objectHeight = objectHeight;
     }
 
     public boolean isAlive() {

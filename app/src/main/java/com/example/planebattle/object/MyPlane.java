@@ -10,7 +10,6 @@ import com.example.planebattle.interfaces.IMyPlane;
 import com.example.planebattle.view.MainView;
 import com.example.planebattle.factory.GameObjectFactory;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,44 +39,44 @@ public class MyPlane extends GameObject implements IMyPlane {
     }
 
     @Override
-    public void setScreenWH(float screen_width, float screen_height) {
-        super.setScreenWH(screen_width, screen_height);
-        object_x = screen_width / 2 - object_width / 2;
-        object_y = screen_height - object_height;
-        middle_x = object_x + object_width / 2;
-        middle_y = object_y + object_height / 2;
+    public void setScreenWH(float screenWidth, float screenHeight) {
+        super.setScreenWH(screenWidth, screenHeight);
+        objectX = screenWidth / 2 - objectWidth / 2;
+        objectY = screenHeight - objectHeight;
+        middle_x = objectX + objectWidth / 2;
+        middle_y = objectY + objectHeight / 2;
     }
 
     @Override
     public void initBitmap() {
         myplane = BitmapFactory.decodeResource(resources, R.drawable.myplane);
         myplane2 = BitmapFactory.decodeResource(resources, R.drawable.myplaneexplosion);
-        object_width = myplane.getWidth();
-        object_height = myplane.getHeight();
+        objectWidth = myplane.getWidth();
+        objectHeight = myplane.getHeight();
     }
 
     @Override
     public void drawSelf(Canvas canvas) {
         if (isAlive) {
-            int x = (int) (currentFrame * object_width);
+            int x = (int) (currentView * objectWidth);
             canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width, object_y + object_height);
-            canvas.drawBitmap(myplane, object_x, object_y, paint);
+            canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY + objectHeight);
+            canvas.drawBitmap(myplane, objectX, objectY, paint);
             canvas.restore();
-            currentFrame++;
-            if (currentFrame >= 2) {
-                currentFrame = 0;
+            currentView++;
+            if (currentView >= 2) {
+                currentView = 0;
             }
         } else {
-            int x = (int) (currentFrame * object_width);
+            int x = (int) (currentView * objectWidth);
             canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width, object_y
-                    + object_height);
-            canvas.drawBitmap(myplane2, object_x, object_y, paint);
+            canvas.clipRect(objectX, objectY, objectX + objectWidth, objectY
+                    + objectHeight);
+            canvas.drawBitmap(myplane2, objectX, objectY, paint);
             canvas.restore();
-            currentFrame++;
-            if (currentFrame >= 2) {
-                currentFrame = 1;
+            currentView++;
+            if (currentView >= 2) {
+                currentView = 1;
             }
         }
     }
@@ -145,7 +144,7 @@ public class MyPlane extends GameObject implements IMyPlane {
     @Override
     public void setMiddle_x(float middle_x) {
         this.middle_x = middle_x;
-        this.object_x = middle_x - object_width / 2;
+        this.objectX = middle_x - objectWidth / 2;
     }
 
     @Override
@@ -156,6 +155,6 @@ public class MyPlane extends GameObject implements IMyPlane {
     @Override
     public void setMiddle_y(float middle_y) {
         this.middle_y = middle_y;
-        this.object_y = middle_y - object_height / 2;
+        this.objectY = middle_y - objectHeight / 2;
     }
 }
