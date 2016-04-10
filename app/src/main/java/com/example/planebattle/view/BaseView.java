@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 import com.example.planebattle.planebattle.MainActivity;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
     protected int currentView;

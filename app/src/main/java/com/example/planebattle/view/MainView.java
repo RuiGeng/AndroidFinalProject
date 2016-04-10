@@ -20,27 +20,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 public class MainView extends BaseView {
+    //total score
     private int totalScore;
+    //current speed
     private int gameSpeed;
-    private boolean isTouchPlane;
-    private Bitmap background;
+    //touched flag
+    private boolean isTouched;
+    //background img
+    private Bitmap backgroundBitmap;
+    //player plane
     private MyPlane myPlane;
+    //enemy plane
     private List<EnemyPlane> enemyPlanes;
     private GameObjectFactory objectFactory;
-    private boolean isPlay;
+    //play flag
+    private boolean isPlaying;
 
     public MainView(Context context) {
         super(context);
-		isPlay = true;
+        isPlaying = true;
+        //start speed
         gameSpeed = 1;
         objectFactory = new GameObjectFactory();
         enemyPlanes = new ArrayList<EnemyPlane>();
         myPlane = (MyPlane) objectFactory.createMyPlane(getResources());
         myPlane.setMainView(this);
 
+        //create small enemy plane
         for (int i = 0; i < SmallPlane.totalCount; i++) {
 
             SmallPlane smallPlane = (SmallPlane) objectFactory.createSmallPlane(getResources());
@@ -83,21 +92,24 @@ public class MainView extends BaseView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            isTouchPlane = false;
+            isTouched = false;
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
             float x = event.getX();
             float y = event.getY();
+            //player plane on touch
             if (x > myPlane.getObjectX() && x < myPlane.getObjectX() + myPlane.getObjectWidth()
                     && y > myPlane.getObjectY() && y < myPlane.getObjectY() + myPlane.getObjectHeight()) {
-				if(isPlay){
-                isTouchPlane = true;
-				}
+                if (isPlaying) {
+                    isTouched = true;
+                }
                 return true;
             }
-        } else if (event.getAction() == MotionEvent.ACTION_MOVE && event.getPointerCount() == 1) {
-
-            if (isTouchPlane) {
+        }
+        //move action
+        else if (event.getAction() == MotionEvent.ACTION_MOVE && event.getPointerCount() == 1) {
+            //touch point on player airplane
+            if (isTouched) {
                 float x = event.getX();
                 float y = event.getY();
                 if (x > myPlane.getPlaneMiddleX() + 20) {
@@ -126,9 +138,9 @@ public class MainView extends BaseView {
 
     @Override
     public void initBitmap() {
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
-        scaleX = screenWidth / background.getWidth();
-        scaleY = screenHeight / background.getHeight();
+        backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_01);
+        scaleX = screenWidth / backgroundBitmap.getWidth();
+        scaleY = screenHeight / backgroundBitmap.getHeight();
     }
 
 
@@ -143,7 +155,6 @@ public class MainView extends BaseView {
             }
 
         }
-
         myPlane.initBullet();
 
         if (totalScore >= gameSpeed * 1000 && gameSpeed < 10) {
@@ -158,8 +169,8 @@ public class MainView extends BaseView {
         }
         myPlane.release();
 
-        if (!background.isRecycled()) {
-            background.recycle();
+        if (!backgroundBitmap.isRecycled()) {
+            backgroundBitmap.recycle();
         }
     }
 
@@ -171,10 +182,10 @@ public class MainView extends BaseView {
             canvas.save();
 
             canvas.scale(scaleX, scaleY, 0, 0);
-            canvas.drawBitmap(background, 0, 0, paint);
+            canvas.drawBitmap(backgroundBitmap, 0, 0, paint);
             canvas.restore();
 
-			canvas.save();
+            canvas.save();
             for (EnemyPlane enemyPlane : enemyPlanes) {
                 if (enemyPlane.isAlive()) {
                     enemyPlane.drawSelf(canvas);
@@ -215,13 +226,13 @@ public class MainView extends BaseView {
             initObject();
             drawSelf();
             long endTime = System.currentTimeMillis();
-			if(!isPlay){
-            synchronized (thread) {
-                try {
-                    thread.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-				    }  
+            if (!isPlaying) {
+                synchronized (thread) {
+                    try {
+                        thread.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             try {

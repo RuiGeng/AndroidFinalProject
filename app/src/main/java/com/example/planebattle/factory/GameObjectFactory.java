@@ -8,7 +8,7 @@ import com.example.planebattle.object.MyPlane;
 import com.example.planebattle.object.SmallPlane;
 
 /**
- * Created by RuiGeng on 3/26/2016.
+ * Created by RuiGeng 7128218 on 3/26/2016.
  */
 public class GameObjectFactory {
 

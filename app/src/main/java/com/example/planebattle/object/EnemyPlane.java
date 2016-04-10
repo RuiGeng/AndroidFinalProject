@@ -4,13 +4,20 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
+
+//base class of enemy plane
 public class EnemyPlane extends GameObject {
+    //score of enemy plane
     protected int score;
-    protected int blood;
-    protected int bloodVolume;
+    //current Blood
+    protected int currentBlood;
+    //total Blood
+    protected int totalBlood;
+    //explosion flag
     protected boolean isExplosion;
+    //visible flag
     protected boolean isVisible;
 
     public EnemyPlane(Resources resources) {
@@ -34,6 +41,7 @@ public class EnemyPlane extends GameObject {
     public void release() {
     }
 
+    //logic function
     @Override
     public void logic() {
         if (objectY < screenHeight) {
@@ -44,27 +52,32 @@ public class EnemyPlane extends GameObject {
         isVisible = objectY + objectHeight > 0;
     }
 
+    //be attacked function
     public void attacked(int harm) {
-        blood -= harm;
-        if (blood <= 0) {
+        currentBlood -= harm;
+        if (currentBlood <= 0) {
             isExplosion = true;
         }
     }
 
     @Override
-    public boolean isCollide(GameObject obj) {
+    public boolean isCollide(GameObject gameObject) {
 
-        if (objectX <= obj.getObjectX()
-                && objectX + objectWidth <= obj.getObjectX()) {
+        //object at the game object left side
+        if (objectX <= gameObject.getObjectX()
+                && objectX + objectWidth <= gameObject.getObjectX()) {
             return false;
-        } else if (obj.getObjectX() <= objectX
-                && obj.getObjectX() + obj.getObjectWidth() <= objectX) {
+            //object at the game object right side
+        } else if (gameObject.getObjectX() <= objectX
+                && gameObject.getObjectX() + gameObject.getObjectWidth() <= objectX) {
             return false;
-        } else if (objectY <= obj.getObjectY()
-                && objectY + objectHeight <= obj.getObjectY()) {
+            //object at the game object up side
+        } else if (objectY <= gameObject.getObjectY()
+                && objectY + objectHeight <= gameObject.getObjectY()) {
             return false;
-        } else if (obj.getObjectY() <= objectY
-                && obj.getObjectY() + obj.getObjectHeight() <= objectY) {
+            //object at the game object down side
+        } else if (gameObject.getObjectY() <= objectY
+                && gameObject.getObjectY() + gameObject.getObjectHeight() <= objectY) {
             return false;
         }
         return true;
@@ -82,20 +95,20 @@ public class EnemyPlane extends GameObject {
         this.score = score;
     }
 
-    public int getBlood() {
-        return blood;
+    public int getCurrentBlood() {
+        return currentBlood;
     }
 
-    public void setBlood(int blood) {
-        this.blood = blood;
+    public void setCurrentBlood(int currentBlood) {
+        this.currentBlood = currentBlood;
     }
 
-    public int getBloodVolume() {
-        return bloodVolume;
+    public int getTotalBlood() {
+        return totalBlood;
     }
 
-    public void setBloodVolume(int bloodVolume) {
-        this.bloodVolume = bloodVolume;
+    public void setTotalBlood(int totalBlood) {
+        this.totalBlood = totalBlood;
     }
 
     public boolean isExplosion() {

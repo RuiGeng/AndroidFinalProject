@@ -13,7 +13,7 @@ import com.example.planebattle.constant.ConstantUtil;
 import com.example.planebattle.planebattle.MainActivity;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 public class EndView extends BaseView {
     private int score;

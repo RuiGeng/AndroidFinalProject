@@ -10,11 +10,12 @@ import com.example.planebattle.R;
 import java.util.Random;
 
 /**
- * Created by RuiGeng on 3/28/2016.
+ * Created by RuiGeng 7128218 on 3/28/2016.
  */
 public class SmallPlane extends EnemyPlane {
     private static int currentCount = 0;
     private Bitmap smallPlane;
+    //total plane count
     public static int totalCount = 10;
 
     public SmallPlane(Resources resources) {
@@ -25,10 +26,10 @@ public class SmallPlane extends EnemyPlane {
     @Override
     public void initial(int arg0, float arg1, float arg2) {
         isAlive = true;
-        bloodVolume = 1;
-        blood = bloodVolume;
+        totalBlood = 1;
+        currentBlood = totalBlood;
         Random ran = new Random();
-        speed = ran.nextInt(8) + 8 * arg0;
+        speed = ran.nextInt(10) + 10 * arg0;
         objectX = ran.nextInt((int) (screenWidth - objectWidth));
         objectY = -objectHeight * (currentCount * 2 + 1);
         currentCount++;
@@ -46,8 +47,9 @@ public class SmallPlane extends EnemyPlane {
 
     @Override
     public void drawSelf(Canvas canvas) {
+        //is alive
         if (isAlive) {
-
+            //is not explosion
             if (!isExplosion) {
                 if (isVisible) {
                     canvas.save();

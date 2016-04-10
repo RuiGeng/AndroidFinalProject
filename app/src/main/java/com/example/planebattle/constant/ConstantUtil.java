@@ -1,7 +1,7 @@
 package com.example.planebattle.constant;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 public class ConstantUtil {
     //main view

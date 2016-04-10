@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 public class MyPlane extends GameObject implements IMyPlane {
     //player plane middle x coordinate
@@ -106,13 +106,20 @@ public class MyPlane extends GameObject implements IMyPlane {
     //shoot bullets
     @Override
     public void shoot(Canvas canvas, List<EnemyPlane> planes) {
+        //loop bullet array
         for (Bullet bullet : bullets) {
+            //bullet is alive
             if (bullet.isAlive()) {
+                //loop enemy plane array
                 for (EnemyPlane enemyPlane : planes) {
+                    //enemy plane can be collided
                     if (enemyPlane.isCanCollide()) {
+                        // collide examine
                         if (bullet.isCollide(enemyPlane)) {
+                            //get harm
                             enemyPlane.attacked(bullet.getHarm());
                             if (enemyPlane.isExplosion()) {
+                                //get score
                                 mainView.addGameScore(enemyPlane.getScore());
                             }
                             break;
@@ -127,7 +134,9 @@ public class MyPlane extends GameObject implements IMyPlane {
     //initial bullets
     @Override
     public void initBullet() {
+        //loop bullet array
         for (Bullet bullet : bullets) {
+            // bullet is not alive
             if (!bullet.isAlive()) {
                 bullet.initial(0, planeMiddleX, planeMiddleY);
                 break;

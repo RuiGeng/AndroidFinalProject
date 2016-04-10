@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 
 /**
- * Created by RuiGeng on 3/26/2016.
+ * Created by RuiGeng 7128218 on 3/26/2016.
  */
 
 //base class of the bullet

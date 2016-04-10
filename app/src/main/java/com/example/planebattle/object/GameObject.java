@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 abstract public class GameObject {
     //current object point
@@ -62,6 +62,7 @@ abstract public class GameObject {
         return true;
     }
 
+    //object logic function
     public void logic() {
     }
 

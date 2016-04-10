@@ -12,7 +12,7 @@ import com.example.planebattle.R;
 import com.example.planebattle.constant.ConstantUtil;
 
 /**
- * Created by RuiGeng on 3/25/2016.
+ * Created by RuiGeng 7128218 on 3/25/2016.
  */
 public class ReadyView extends BaseView {
     private float startButtonX;

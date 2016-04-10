@@ -8,8 +8,10 @@ import android.graphics.Canvas;
 import com.example.planebattle.R;
 
 /**
- * Created by RuiGeng on 3/26/2016.
+ * Created by RuiGeng 7128218 on 3/26/2016.
  */
+
+//base class of the player bullet
 public class MyBullet extends Bullet {
     private Bitmap bullet;
 
