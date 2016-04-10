@@ -84,8 +84,8 @@ public class MainView extends BaseView {
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        super.surfaceDestroyed(holder);
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+        super.surfaceDestroyed(surfaceHolder);
         release();
     }
 
