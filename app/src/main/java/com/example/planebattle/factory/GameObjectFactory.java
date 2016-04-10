@@ -12,14 +12,17 @@ import com.example.planebattle.object.SmallPlane;
  */
 public class GameObjectFactory {
 
+    //create player bullet
     public GameObject createMyBullet(Resources resources) {
         return new MyBullet(resources);
     }
 
+    //create enemy airplane
     public GameObject createSmallPlane(Resources resources) {
         return new SmallPlane(resources);
     }
 
+    //create player airplane
     public GameObject createMyPlane(Resources resources) {
         return new MyPlane(resources);
     }

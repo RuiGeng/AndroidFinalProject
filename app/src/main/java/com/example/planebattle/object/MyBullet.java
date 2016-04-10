@@ -61,7 +61,7 @@ public class MyBullet extends Bullet {
     }
 
     @Override
-    public boolean isCollide(GameObject obj) {
-        return super.isCollide(obj);
+    public boolean isCollide(GameObject gameObject) {
+        return super.isCollide(gameObject);
     }
 }

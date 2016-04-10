@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 /**
  * Created by RuiGeng on 3/26/2016.
  */
+
+//base class of the bullet
 public class Bullet extends GameObject {
     protected int harm;
 
@@ -27,21 +29,25 @@ public class Bullet extends GameObject {
     }
 
     @Override
-    public boolean isCollide(GameObject obj) {
+    public boolean isCollide(GameObject gameObject) {
 
-        if (objectX <= obj.getObjectX()
-                && objectX + objectWidth <= obj.getObjectX()) {
+        //object at the game object left side
+        if (objectX <= gameObject.getObjectX()
+                && objectX + objectWidth <= gameObject.getObjectX()) {
             return false;
-        } else if (obj.getObjectX() <= objectX
-                && obj.getObjectX() + obj.getObjectWidth() <= objectX) {
+            //object at the game object right side
+        } else if (gameObject.getObjectX() <= objectX
+                && gameObject.getObjectX() + gameObject.getObjectWidth() <= objectX) {
             return false;
-        } else if (objectY <= obj.getObjectY()
-                && objectY + objectHeight <= obj.getObjectY()) {
+            //object at the game object up side
+        } else if (objectY <= gameObject.getObjectY()
+                && objectY + objectHeight <= gameObject.getObjectY()) {
             return false;
-        } else if (obj.getObjectY() <= objectY
-                && obj.getObjectY() + obj.getObjectHeight() <= objectY) {
-            if (obj instanceof SmallPlane) {
-                if (objectY - speed < obj.getObjectY()) {
+            //object at the game object down side
+        } else if (gameObject.getObjectY() <= objectY
+                && gameObject.getObjectY() + gameObject.getObjectHeight() <= objectY) {
+            if (gameObject instanceof SmallPlane) {
+                if (objectY - speed < gameObject.getObjectY()) {
                     isAlive = false;
                     return true;
                 }
